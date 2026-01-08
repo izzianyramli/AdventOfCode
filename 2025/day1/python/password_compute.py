@@ -1,13 +1,20 @@
 # Day 1 - Password Computation
-
-file_path = "rotations.txt"
+import argparse
 
 rotate_list = []
 direction = []
 steps = []
 
 
-def main():
+def wrap_0_99(value):
+    while (value >= 100):
+        value = value - 100
+    while value < 0:
+        value = value + 100
+    return value
+
+
+def main(file_path):
     print("Password Computation")
 
     print("Reading txt file")
@@ -28,9 +35,11 @@ def main():
 
     for i, d in enumerate(direction):
         if (d == "L"):
-            position = (position - steps[i]) % 100
+            position = (position - steps[i])
         elif (d == "R"):
-            position = (position + steps[i]) % 100
+            position = (position + steps[i])
+        
+        position = wrap_0_99(position)
     
         print(f"Current position={position}")
         if position == 0:
@@ -39,5 +48,10 @@ def main():
     print(f"\nPassword = {password}")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Advent of Code - Day 1")
+    
+    parser.add_argument("file_path", type=str, default="rotations.txt", help="Path to the rotation list txt file")
+    args = parser.parse_args()
+    
+    main(args.file_path)
     
