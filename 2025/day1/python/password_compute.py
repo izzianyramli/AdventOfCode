@@ -1,4 +1,6 @@
 # Day 1 - Password Computation
+# Usage: python3 password_compute.py rotations.txt
+
 import argparse
 
 rotate_list = []
